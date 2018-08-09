@@ -8,6 +8,7 @@ from .option_models import Option_value
 from .category_models import Category
 from .download_models import Download
 from django.utils import timezone
+import uuid
 # Create your models here.
 
 class Manufacturer(models.Model):
@@ -186,7 +187,7 @@ class Product(models.Model):
         app_label = "product"#兼容1.7以前版本
 
     def __str__(self):
-        return self.model
+        return str(self.model)
 
 
 class Product_attribute_value(models.Model):
@@ -205,6 +206,10 @@ class Product_attribute_value(models.Model):
 
     def __str__(self):
         return str(self.attribute_key) + "---" + self.text
+
+    class Meta:
+        verbose_name = "属性"
+        verbose_name_plural = "属性"
 
 
 class Product_description(models.Model):
@@ -245,7 +250,11 @@ class Product_description(models.Model):
                                     max_length=254)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
+
+    class Meta:
+        verbose_name = "详情"
+        verbose_name_plural = "详情"
 
 
 class Product_discount(models.Model):
@@ -266,6 +275,13 @@ class Product_discount(models.Model):
                                  on_delete=models.CASCADE,
                                  verbose_name="客户组")
 
+    def __str__(self):
+        return str(self.product)
+
+    class Meta:
+        verbose_name = "商品折扣"
+        verbose_name_plural = "商品折扣"
+
 
 class Product_filter(models.Model):
     """商品过滤"""
@@ -280,6 +296,13 @@ class Product_filter(models.Model):
                             verbose_name="过滤关键字 ",
                             default="")
 
+    def __str__(self):
+        return str(self.text)
+
+    class Meta:
+        verbose_name = "商品过滤"
+        verbose_name_plural = "商品过滤"
+
 
 class Product_image(models.Model):
     """商品附属图"""
@@ -292,6 +315,13 @@ class Product_image(models.Model):
 
     order = models.IntegerField(default=0,
                                 verbose_name="排序")
+
+    def __str__(self):
+        return str(self.product_image_id)
+
+    class Meta:
+        verbose_name = "商品附属图"
+        verbose_name_plural = "商品附属图"
 
 
 class Product_option(models.Model):
@@ -329,6 +359,13 @@ class Product_option(models.Model):
                                    blank=True,
                                    help_text="1积分等于RMB一元，客户可用于积分抵扣")
 
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name = "商品选项"
+        verbose_name_plural = "商品选项"
+
 
 class Product_related(models.Model):
     """相关联商品"""
@@ -347,8 +384,14 @@ class Product_related(models.Model):
     order = models.IntegerField(default=0,
                                 verbose_name="排序")
 
-    related_id = models.IntegerField(verbose_name="关联ID",
-                                     editable=False)
+    related_id = models.UUIDField(default=uuid.uuid4, editable=False)
+
+    def __str__(self):
+        return str(self.related_name)
+
+    class Meta:
+        verbose_name = "相关联商品"
+        verbose_name_plural = "相关联商品"
 
 
 class Product_Special(models.Model):
@@ -371,6 +414,13 @@ class Product_Special(models.Model):
     Date_end = models.DateTimeField(verbose_name="结束时间",
                                     default=timezone.now)
 
+    def __str__(self):
+        return str(self.price)
+
+    class Meta:
+        verbose_name = "特价"
+        verbose_name_plural = "特价"
+
 
 class Product_category(models.Model):
     """产品分类"""
@@ -381,11 +431,26 @@ class Product_category(models.Model):
                                  on_delete=models.CASCADE,
                                  verbose_name="分类")
 
+    def __str__(self):
+        return str(self.product) + str(self.category)
+
+    class Meta:
+        verbose_name = "产品分类"
+        verbose_name_plural = "产品分类"
+
 
 class Product_download(models.Model):
+    """下载商品数据"""
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
                                 verbose_name="商品")
     download = models.ForeignKey(Download,
                                  on_delete=models.PROTECT,
                                  verbose_name="下载")#启动models。PROTECT保护，防止误删除
+
+    def __str__(self):
+        return str(self.product)
+
+    class Meta:
+        verbose_name = "下载商品数据"
+        verbose_name_plural = "下载商品数据"

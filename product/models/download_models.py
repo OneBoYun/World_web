@@ -5,15 +5,15 @@ from .language_models import Language
 
 class Download(models.Model):
     download_id = models.AutoField(primary_key=True)
+
     filename = models.CharField(verbose_name="文件名",
                                 max_length=255)
-    mask = AutoSlugField(max_length=40,
-                         unique=True,
-                         populate_from=filename,
-                         verbose_name="掩码")
 
     date_added = models.DateTimeField(auto_now_add=True,
                                       verbose_name="添加时间")
+
+    def __str__(self):
+        return self.filename
 
 
 class Download_description(models.Model):
@@ -26,3 +26,6 @@ class Download_description(models.Model):
                                  verbose_name="语言")
     name = models.CharField(verbose_name="下载名称",
                             max_length=64)
+
+    def __str__(self):
+        return self.name

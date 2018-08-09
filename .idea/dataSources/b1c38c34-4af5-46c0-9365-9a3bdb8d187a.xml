@@ -1699,7 +1699,7 @@ site_id</ColNames>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="377" parent="46" name="related_id">
+    <column id="377" parent="46" name="related_name_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1714,17 +1714,17 @@ site_id</ColNames>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="380" parent="46" name="related_name_id">
+    <column id="380" parent="46" name="related_id">
       <Position>5</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>char(32)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="381" parent="46" name="product_product_related_product_id_b8e36683">
-      <ColNames>product_id</ColNames>
+    <index id="381" parent="46" name="product_product_related_related_name_id_b645a4ca">
+      <ColNames>related_name_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <index id="382" parent="46" name="product_product_related_related_name_id_b645a4ca">
-      <ColNames>related_name_id</ColNames>
+    <index id="382" parent="46" name="product_product_related_product_id_b8e36683">
+      <ColNames>product_id</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
     <key id="383" parent="46">
@@ -1732,14 +1732,14 @@ site_id</ColNames>
       <Primary>1</Primary>
     </key>
     <foreign-key id="384" parent="46">
-      <ColNames>product_id</ColNames>
+      <ColNames>related_name_id</ColNames>
       <RefTableName>world_product</RefTableName>
       <RefColNames>product_id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
     <foreign-key id="385" parent="46">
-      <ColNames>related_name_id</ColNames>
+      <ColNames>product_id</ColNames>
       <RefTableName>world_product</RefTableName>
       <RefColNames>product_id</RefColNames>
       <Deferrable>1</Deferrable>

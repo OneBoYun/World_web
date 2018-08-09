@@ -12,21 +12,28 @@ from product.models.product_models import (Product, Product_description,
 
 # Create your views here.
 def product(request, product_id):
+
+
     product = Product.objects.get(product_id=product_id)
-    manufacturer = Manufacturer.objects.get(product_id=product_id)
+    manufacturer = Manufacturer.objects.get(id=product_id)
     attribute = Product_attribute_value.objects.get(product_id=product_id)
     description = Product_description.objects.get(product_id=product_id)
     discount = Product_discount.objects.get(product_id=product_id)
-    discount = Product_filter.objects.get(product_id=product_id)
-    discount = Product_image.objects.get(product_id=product_id)
-    discount = Product_option.objects.get(product_id=product_id)
-    discount = Product_related.objects.get(product_id=product_id)
-    discount = Product_Special.objects.get(product_id=product_id)
-    discount = Product_category.objects.get(product_id=product_id)
-    discount = Product_download.objects.get(product_id=product_id)
+    filter = Product_filter.objects.get(product_id=product_id)
+    image = Product_image.objects.filter(product__product_id=product_id)
+    option = Product_option.objects.get(product_id=product_id)
+    related = Product_related.objects.filter(product__product_id=product_id)
+    special = Product_Special.objects.get(product_id=product_id)
+    category = Product_category.objects.get(product_id=product_id)
+    download = Product_download.objects.filter(product__product_id=product_id)
 
+    content = {"product": product, "manufacturer": manufacturer,
+               "attribute": attribute, "description": description,
+               "discount": discount, "filter": filter,
+               "image": image, "option": option,
+               "related": related, "special": special,
+               "category": category, "download": download}
 
-    content = {"product": product, "description": product_description}
     return render(request, 'product/introduction.html', content)
 
 

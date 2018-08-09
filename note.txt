@@ -1,0 +1,20 @@
+Product_filter
+商品过滤 采用key->value 对应 一键对应多值。
+key属于特定filter组
+
+Product_Special
+特价 针对客户群体定制
+
+product应用
+export_selected_objects函数还未写各种导出视图功能
+
+安装PostgreSQL
+http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html
+sudo apt-get install postgresql-client
+sudo apt-get install postgresql
+linux用户dbuser zhangbo
+postgreSQL用户=dbuser zhangbo
+postgres postgres
+
+geo数据库
+

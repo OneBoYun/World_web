@@ -1,0 +1,19 @@
+{% extends "common.html" %}
+{% block title %}{% endblock title %}
+{% block user_head %}
+    {% block login_head %}{% endblock login_head %}
+    {% block register_head %}{% endblock register_head %}
+{% endblock user_head %}
+
+{% block user %}
+		<div class="login-boxtitle">
+			<a href="/"><img alt="logo" src="/static/User_system/images/logobig.png" /></a>
+		</div>
+    {% block login %}{% endblock login %}
+    {% block register %}{% endblock register %}
+{% endblock user %}
+
+{% block user_other %}
+    {% block login_other %}{% endblock login_other %}
+    {% block register_other %}{% endblock register_other %}
+{% endblock user_other %}

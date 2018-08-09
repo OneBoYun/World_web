@@ -130,13 +130,13 @@ class CityAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     # actions = None
     show_full_result_count = False #设置show_full_result_count为控制是否应在过滤的管理页面上显示完整的对象计数
-    search_fields = ["product_id", "model", "sku", "quantity", "status", "viewed"] #商品列表搜索框
+    search_fields = ["name", "product_id", "model", "sku", "quantity", "status", "viewed"] #商品列表搜索框
     save_on_top = True #商品编辑页面顶部保存按钮
     #raw_id_fields = ("manufacturer_id", "location")#默认情况下，Django的管理员使用选择框界面（<select>）作为字段ForeignKey。有时您不希望产生必须选择要在下拉列表中显示的所有相关实例的开销。
     autocomplete_fields = ['manufacturer_id', 'location']#添加外键搜索框 商品编辑页使用
     date_hierarchy = "date_added"
-    list_display = ["product_id", "model", "sku", "status", "date_added", "quantity", ]#设置list_display控制在管理员的更改列表页面上显示的字段
-    list_display_links = ["product_id", "model", "sku", "status", "date_added", ]#将字段赋予超链接
+    list_display = ["name", "product_id", "model", "sku", "status", "date_added", "quantity", ]#设置list_display控制在管理员的更改列表页面上显示的字段
+    list_display_links = ["name", "product_id", "model", "sku", "status", "date_added", ]#将字段赋予超链接
     list_editable = ["quantity",]#在列表页赋予可编辑状态
     list_filter = ["model", "sku", "status", "quantity",] #设置list_filter为激活管理员更改列表页面右侧边栏中的过滤器
     list_per_page = 15 #设置每页显示的条数
@@ -144,7 +144,7 @@ class ProductAdmin(admin.ModelAdmin):
     # radio_fields = {"manufacturer_id": admin.VERTICAL}
     fieldsets = (
         ("属性", {
-            'fields': (("image", "location"),
+            'fields': ("name", ("image", "location"),
                        ("price", 'model', 'sku'),
                        ("upc", "ean", "jan", "isbn", "mpn"),
                        ("length_class_id", "height", "width", "length"),

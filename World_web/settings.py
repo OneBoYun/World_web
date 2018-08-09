@@ -86,7 +86,6 @@ WSGI_APPLICATION = 'World_web.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-SPATIALITE_LIBRARY_PATH = 'mod_spatialite'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

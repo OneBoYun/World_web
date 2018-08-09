@@ -34,6 +34,11 @@ class Product(models.Model):
     """模型需联合查看"""
     product_id = models.AutoField(primary_key=True)
 
+    name = models.CharField(max_length=256,
+                            default="",
+                            verbose_name="默认商品名字",
+                            help_text="其他国家可以在详情选择填写")
+
     model = models.CharField(verbose_name="型号",
                              max_length=64)
 
@@ -357,9 +362,10 @@ class Product_Special(models.Model):
                                        verbose_name="特价客户群体")
     priority = models.IntegerField(verbose_name="优先级",
                                    default=0)
-    price = models.DecimalField(verbose_name="Price",
+    price = models.DecimalField(verbose_name="折扣百分比%",
                                 max_digits=19,
-                                decimal_places=9)
+                                decimal_places=9,
+                                help_text="原价的减去折扣百分比")
     Date_start = models.DateTimeField(verbose_name="开始时间",
                                       default=timezone.now)
     Date_end = models.DateTimeField(verbose_name="结束时间",

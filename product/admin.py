@@ -149,7 +149,7 @@ class ProductAdmin(admin.ModelAdmin):
                        ("upc", "ean", "jan", "isbn", "mpn"),
                        ("length_class_id", "height", "width", "length"),
                        ("weight_class_id", "weight"),
-                       ("viewed", "sort_order", "tax_class_id", "stock_status_id", "quantity"),
+                       ("sales_volume", "viewed", "sort_order", "tax_class_id", "stock_status_id", "quantity"),
                        ("date_available", "manufacturer_id", "status", "shipping"))
         }),
     )
@@ -161,7 +161,7 @@ class ProductAdmin(admin.ModelAdmin):
     #           ("viewed", "sort_order", "tax_class_id", "stock_status_id", "quantity"),
     #           ("date_available", "manufacturer_id", "status", "shipping"))#商品编辑页
 
-    readonly_fields = ["viewed"]#设置为只读
+    readonly_fields = ["viewed", "sales_volume"]#设置为只读
 
     inlines = [
         AttributeInline, DescriptionInline, DiscountInline, FilterInline,

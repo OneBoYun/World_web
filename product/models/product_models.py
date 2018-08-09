@@ -85,7 +85,7 @@ class Product(models.Model):
 
     stock_status_id = models.IntegerField(verbose_name="商铺id",
                                           default=0,
-                                           null=True,
+                                          null=True,
                                           blank=True)#0代表属于系统商铺, 商家发布商品，自动添加商品ID
 
     image = models.ImageField(verbose_name="主图",
@@ -173,6 +173,10 @@ class Product(models.Model):
                                  default=0,
                                  null=True,
                                  blank=True)
+    sales_volume = models.IntegerField(verbose_name="销量",
+                                       default=0,
+                                       null=True,
+                                       blank=True)
 
     date_added = models.DateTimeField(verbose_name="添加日期",
                                       auto_now_add=True)
@@ -395,19 +399,17 @@ class Product_related(models.Model):
 
 
 class Product_Special(models.Model):
-    """特价"""
+    """VIP特价"""
     special_id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product,
                                 on_delete=models.CASCADE,
                                 verbose_name="商品")
     customer_group = models.ForeignKey(Customer_group,
                                        on_delete=models.CASCADE,
-                                       verbose_name="特价客户群体")
+                                       verbose_name="VIP客户群体")
     priority = models.IntegerField(verbose_name="优先级",
                                    default=0)
-    price = models.DecimalField(verbose_name="折扣百分比%",
-                                max_digits=19,
-                                decimal_places=9,
+    price = models.IntegerField(verbose_name="折扣百分比%",
                                 help_text="原价的减去折扣百分比")
     Date_start = models.DateTimeField(verbose_name="开始时间",
                                       default=timezone.now)

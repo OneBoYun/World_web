@@ -17,6 +17,8 @@ from django.contrib.flatpages import views
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from product.admin import admin_site
 from product.admin import basic_site
 from product.admin import advanced_site
@@ -54,7 +56,7 @@ urlpatterns = [
     path('information/', include('information.urls', namespace='information')),
     path('blog/', include('blog.urls', namespace='blog')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
     path('<path:url>', views.flatpage),

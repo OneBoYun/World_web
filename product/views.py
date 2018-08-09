@@ -9,11 +9,10 @@ from product.models.product_models import (Product, Product_description,
                                            Product_related, Product_Special,
                                            Product_category, Product_download)
 
-
 # Create your views here.
 def product(request, product_id):
-
-
+    OPTION_COUNT = {}
+    OPTIONS = {}
     product = Product.objects.get(product_id=product_id)
     manufacturer = Manufacturer.objects.get(id=product_id)
     attribute = Product_attribute_value.objects.get(product_id=product_id)
@@ -21,7 +20,15 @@ def product(request, product_id):
     discount = Product_discount.objects.get(product_id=product_id)
     filter = Product_filter.objects.get(product_id=product_id)
     image = Product_image.objects.filter(product__product_id=product_id)
-    option = Product_option.objects.get(product_id=product_id)
+    option = Product_option.objects.filter(product__product_id=product_id)
+    for op in option:
+        name_temp = op.option_value.name
+        if OPTION_COUNT.get(name_temp):
+            OPTION_COUNT[name_temp].append([op.name, op.image, op.quantity, op.subtract, op.price, op.integral])
+        else:
+            OPTION_COUNT[name_temp] = [[op.name, op.image, op.quantity, op.subtract, op.price, op.integral]]
+    OPTIONS["options"]= OPTION_COUNT
+
     related = Product_related.objects.filter(product__product_id=product_id)
     special = Product_Special.objects.get(product_id=product_id)
     category = Product_category.objects.get(product_id=product_id)
@@ -33,7 +40,8 @@ def product(request, product_id):
                "image": image, "option": option,
                "related": related, "special": special,
                "category": category, "download": download}
-
+    content.update(OPTIONS)
+    print(content)
     return render(request, 'product/introduction.html', content)
 
 

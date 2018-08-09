@@ -90,24 +90,22 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="/static/images/01.jpg"><img src="/static/images/01_mid.jpg" alt="细节展示放大镜特效" rel="/static/images/01.jpg" class="jqzoom" /></a>
+								<a href="/static/images/01.jpg"><img src="/media/{{ product.image }}" alt="细节展示放大镜特效" rel="/static/images/01.jpg" class="jqzoom" /></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
-								<li class="tb-selected">
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/static/images/01_small.jpg" mid="/static/images/01_mid.jpg" big="/static/images/01.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/static/images/02_small.jpg" mid="/static/images/02_mid.jpg" big="/static/images/02.jpg"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/static/images/03_small.jpg" mid="/static/images/03_mid.jpg" big="/static/images/03.jpg"></a>
-									</div>
-								</li>
+                                {% for img in image %}
+                                    <li>
+									    <div class="tb-pic tb-s40">
+										    <a href="#"><img src="/media/{{ img.image }}" mid="/media/{{ img.image }}" big="/media/{{ img.image }}"></a>
+									    </div>
+								    </li>
+                                {% endfor %}
+{#								<li class="tb-selected">#}
+{#									<div class="tb-pic tb-s40">#}
+{#										<a href="#"><img src="/static/images/01_small.jpg" mid="/static/images/01_mid.jpg" big="/static/images/01.jpg"></a>#}
+{#									</div>#}
+{#								</li>#}
+
 							</ul>
 						</div>
 
@@ -119,18 +117,18 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-							<h1>良品铺子 手剥松子218g 坚果炒货 巴西松子{{ product.sku }}</h1>
+							<h1>{{ product.name }}</h1>
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">56.90</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{ discount.price | floatformat:"2" }}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									
+									<dd><em>¥</em><b class="sys_item_mktprice">{{ product.price | floatformat:"2" }}</b></dd>
 								</li>
 								<div class="clear"></div>
 							</div>
@@ -166,10 +164,13 @@
 									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">6015</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{ product.sales_volume }}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
 									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
+								</li>
+                                <li class="tm-ind-item tm-ind-sumCount canClick">
+									<div class="tm-indcon"><span class="tm-label">浏览量</span><span class="tm-count">{{ product.viewed }}</span></div>
 								</li>
 							</ul>
 							<div class="clear"></div>
@@ -191,7 +192,22 @@
 											<form class="theme-signin" name="loginform" action="" method="post">
 
 												<div class="theme-signin-left">
-
+                                                    {% if option %}
+                                                        {% for op_key, op_value in options.items %}
+                                                            <div class="theme-options">
+														        <div class="cart-title">口味{{ op_key }}</div>
+														        <ul>
+                                                                    {% for op in op_value %}
+                                                                        <li class="sku-line">{{ op.0 }}咸香<i></i></li>
+                                                                    {% endfor %}
+{#                                                                    <li class="sku-line selected">原味<i></i></li>#}
+{#                                                                    <li class="sku-line">奶油<i></i></li>#}
+{#                                                                    <li class="sku-line">炭烧<i></i></li>#}
+{#                                                                    <li class="sku-line">咸香<i></i></li>#}
+                                                                </ul>
+													        </div>
+                                                        {% endfor %}
+                                                    {% endif %}
 													<div class="theme-options">
 														<div class="cart-title">口味</div>
 														<ul>
@@ -215,7 +231,7 @@
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+															<span id="Stock" class="tb-hidden">库存<span class="stock">{{ product.quantity }}</span>件</span>
 														</dd>
 
 													</div>

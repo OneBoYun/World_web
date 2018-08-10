@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'product',
     'information',
     'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -148,6 +150,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 AUTH_USER_MODEL = 'User_system.MyUser'
 
@@ -158,3 +161,22 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # LOGIN_URL = "/user/login"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': (
+            ['div','Source','-','Save','NewPage','Preview','-','Templates'],
+            ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],
+            ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+            ['Form','Checkbox','Radio','TextField','Textarea','Select','Button', 'ImageButton','HiddenField'],
+            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+            ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['Link','Unlink','Anchor'],
+            ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+            ['Styles','Format','Font','FontSize'],
+            ['TextColor','BGColor'],
+            ['Maximize','ShowBlocks','-','About', 'pbckcode'],
+        ),
+    }
+}

@@ -194,6 +194,12 @@ class ProductAdmin(admin.ModelAdmin):
     empty_value_display = 'empty' #替换默认显示空值方法
 
 
+
+
+class DescriptionAdmin(admin.ModelAdmin):
+    list_display = ["name", "product_description_id", "language", "tag"]
+
+
 admin.site.register(Province)
 admin.site.register(City, CityAdmin)
 admin.site.register(Municipal_district)
@@ -222,7 +228,7 @@ admin.site.register(Option_value)
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Product_attribute_value)
-admin.site.register(Product_description)
+admin.site.register(Product_description, DescriptionAdmin)
 admin.site.register(Product_discount)
 admin.site.register(Product_filter)
 admin.site.register(Product_image)

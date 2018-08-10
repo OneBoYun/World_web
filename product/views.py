@@ -15,7 +15,7 @@ def product(request, product_id):
     OPTIONS = {}
     product = Product.objects.get(product_id=product_id)
     manufacturer = Manufacturer.objects.get(id=product_id)
-    attribute = Product_attribute_value.objects.get(product_id=product_id)
+    attribute = Product_attribute_value.objects.filter(product_id=product_id)
     description = Product_description.objects.get(product_id=product_id)
     discount = Product_discount.objects.get(product_id=product_id)
     filter = Product_filter.objects.get(product_id=product_id)

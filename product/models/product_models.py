@@ -9,6 +9,7 @@ from .category_models import Category
 from .download_models import Download
 from django.utils import timezone
 import uuid
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 class Manufacturer(models.Model):
@@ -230,7 +231,7 @@ class Product_description(models.Model):
 
     name = models.CharField(verbose_name="商品名称",
                             max_length=254)
-    description = models.TextField(verbose_name="商品详情",
+    description = RichTextUploadingField(verbose_name="商品详情",
                                    null=True,
                                    blank=True)
 

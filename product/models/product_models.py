@@ -361,6 +361,7 @@ class Product_option(models.Model):
     integral = models.IntegerField(verbose_name="积分",
                                    null=True,
                                    blank=True,
+                                   default=0,
                                    help_text="1积分等于RMB一元，客户可用于积分抵扣")
 
     def __str__(self):

@@ -29,7 +29,7 @@ django-analytical==2.4.0
 django-appconf==1.0.1
 django-audiofield==0.10.0
 django-blog-zinnia==0.20
-django-cachalot==2.1.0
+django-cachalot==2.0.2
 django-celery==3.2.2
 django-celery-email==2.0.0
 django-ckeditor==5.6.1
@@ -44,6 +44,7 @@ django-debug-toolbar==1.9.1
 django-downloadview==1.9
 django-extensions==2.1.0
 django-filter==2.0.0
+django-grappelli==2.11.1
 django-guardian==1.4.9
 django-haystack==2.8.1
 django-image-cropping==1.1.0

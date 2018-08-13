@@ -82,6 +82,10 @@ class Category(models.Model):
         #     return ""
         return self.name
 
+    class Meta:
+        verbose_name = "分类"
+        verbose_name_plural = "分类"
+
 
 class Category_description(models.Model):
     """多语言接入"""
@@ -123,6 +127,10 @@ class Category_description(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "分类详情"
+        verbose_name_plural = "分类详情"
+
 
 class Category_filter(models.Model):
     category_filter_id = models.AutoField(primary_key=True)
@@ -133,3 +141,10 @@ class Category_filter(models.Model):
     category = models.OneToOneField(Category,
                                     on_delete=models.CASCADE,
                                     verbose_name="分类")
+
+    def __str__(self):
+        return self.category_filter_id
+
+    class Meta:
+        verbose_name = "分类筛选"
+        verbose_name_plural = "分类筛选"

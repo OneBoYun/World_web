@@ -26,6 +26,7 @@ from product.admin import advanced_site
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path(
         'admin/password_reset/',
         auth_views.PasswordResetView.as_view(),

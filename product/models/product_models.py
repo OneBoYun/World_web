@@ -10,6 +10,7 @@ from .download_models import Download
 from django.utils import timezone
 import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
+from sales.models import Sales
 # Create your models here.
 
 class Manufacturer(models.Model):
@@ -458,3 +459,15 @@ class Product_download(models.Model):
     class Meta:
         verbose_name = "下载商品数据"
         verbose_name_plural = "下载商品数据"
+
+
+class Product_activity(models.Model):
+    sales_id = models.ForeignKey(Sales,
+                              on_delete=models.CASCADE,
+                              verbose_name="活动名称")
+    product_id = models.OneToOneField(Product,
+                                      on_delete=models.CASCADE,
+                                      )
+    price = models.DecimalField(verbose_name="活动价",
+                                max_digits=9,
+                                decimal_places=2)

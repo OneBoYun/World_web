@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from .filter_models import Filter
 from .language_models import Language
 import pymysql.cursors
@@ -65,6 +66,7 @@ class Category(models.Model):
 
     date_mofified = models.DateTimeField(verbose_name="修改日期",
                                          auto_now=True)
+
 
     def __str__(self):
         # import sqlite3

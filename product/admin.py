@@ -22,9 +22,14 @@ from product.models.option_models import (Option, Option_value)
 from product.models.product_models import (Manufacturer, Product, Product_attribute_value, Product_description,
                                            Product_discount, Product_filter, Product_image,
                                            Product_option, Product_related, Product_Special,
-                                           Product_category, Product_download)
+                                           Product_category, Product_download, Product_activity)
 
 # Register your models here.
+
+
+
+
+
 from django.contrib.admin import AdminSite
 
 class MyAdminSite(AdminSite):
@@ -111,6 +116,10 @@ class DownloadInline(admin.TabularInline):
     model = Product_download
 
 
+class ActivityInline(admin.TabularInline):
+    model = Product_activity
+
+
 def upper_case_name(obj):
     """设置后添加到list_display"""
     return ("%s %s" % (obj.model, obj.sku)).upper()
@@ -163,10 +172,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     readonly_fields = ["viewed", "sales_volume"]#设置为只读
 
-    inlines = [
+    inlines = [ActivityInline,
         AttributeInline, DescriptionInline, DiscountInline, FilterInline,
         OptionInline, ImageInline, RelatedInline, SpecialInline,
-        CategoryInline, DownloadInline
+        CategoryInline, DownloadInline,
     ]
     actions = ["Close_status", "Batch_shelves"]#批量上下架商品
 
@@ -194,10 +203,19 @@ class ProductAdmin(admin.ModelAdmin):
     empty_value_display = 'empty' #替换默认显示空值方法
 
 
-
-
 class DescriptionAdmin(admin.ModelAdmin):
     list_display = ["name", "product_description_id", "language", "tag"]
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    # list_display = ('name', 'image_data')
+    readonly_fields = ('image_data',)
+
+    def image_data(self, obj):
+        return mark_safe('<img src="%s" width="100px" />' % obj.image.url)
+
+    image_data.short_description = '分类图片'# 页面显示的字段名称
+
 
 
 admin.site.register(Province)
@@ -207,7 +225,7 @@ admin.site.register(Municipal_district)
 admin.site.register(Attribute_group)
 admin.site.register(Attribute)
 
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Category_description)
 admin.site.register(Category_filter)
 

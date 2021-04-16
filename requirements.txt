@@ -40,7 +40,7 @@ django-cors-headers==2.4.0
 django-countries==5.3.1
 django-crispy-forms==1.7.2
 django-dashing==0.3.3
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 django-downloadview==1.9
 django-extensions==2.1.0
 django-filter==2.0.0

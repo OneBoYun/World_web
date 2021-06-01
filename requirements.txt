@@ -114,7 +114,7 @@ sqlparse==0.2.4
 Twisted==18.7.0
 txaio==18.7.1
 Unidecode==0.4.21
-urllib3==1.23
+urllib3==1.26.5
 vine==1.1.4
 wagtail==2.1.2
 webencodings==0.5.1

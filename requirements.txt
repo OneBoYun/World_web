@@ -13,7 +13,7 @@ beautifulsoup4==4.6.0
 billiard==3.5.0.4
 binaryornot==0.4.4
 celery==4.2.1
-certifi==2018.4.16
+certifi==2022.12.7
 cffi==1.11.5
 channels==2.1.2
 chardet==3.0.4
